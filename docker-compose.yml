@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes: 
+      - ./db/words.sql:/docker-entrypoint-initdb.d/words.sql
+  web:
+    build: web
+    ports: 
+      - 80:80
+  words:
+    build: words
+    ports:
+      - 8080:8080
+
